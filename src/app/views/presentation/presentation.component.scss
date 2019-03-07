@@ -1,0 +1,29 @@
+@import '../../../mixins';
+@import '../../../variables';
+
+.presentation {
+  @include flex(center, center, column);
+  padding-top: 80px;
+  .introduction {
+    font-size: 40px;
+    color: $primary-color;
+  }
+  .control {
+    border: 3px solid $primary-color;
+    padding: 12px 8px;
+    margin: 20px 0;
+    width: 300px;
+    input {
+      width: 100%;
+      border: 0;
+      text-align: center;
+      font-size: 18px;
+      color: $dark-color;
+      outline: 0;
+      font-family: inherit;
+    }
+  }
+  button {
+    @include button($dark-color, white);
+  }
+}

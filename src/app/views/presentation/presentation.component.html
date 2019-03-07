@@ -1,3 +1,9 @@
-<p>
-  presentation works!
-</p>
+<div class="presentation">
+  <div class="introduction">
+    Select player name
+  </div>
+  <div class="control">
+    <input [formControl]="name" type="text" placeholder="link" />
+  </div>
+  <button (click)="startGame()" [disabled]="!name.valid">Start Game</button>
+</div>

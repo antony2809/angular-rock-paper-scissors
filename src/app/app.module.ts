@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +11,13 @@ import { GameState } from './state/game.state';
 
 @NgModule({
   declarations: [AppComponent, PresentationComponent, GameComponent],
-  imports: [BrowserModule, AppRoutingModule, NgxsModule.forRoot([GameState])],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    NgxsModule.forRoot([GameState]),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

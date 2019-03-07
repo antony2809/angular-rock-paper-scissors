@@ -1,5 +1,5 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { InitGame } from './game.actions';
+import { InitGame, StartGame } from './game.actions';
 
 export class GameStateModel {
   selectingName: boolean;
@@ -28,18 +28,27 @@ const initialList = Array.from(Array(30))
 })
 export class GameState {
   @Selector()
-  static score({ playerScore, computerScore }: GameStateModel) {
-    return { playerScore, computerScore };
+  static game(state: GameStateModel) {
+    return state;
   }
 
   @Selector()
-  static playerName({ playerName }: GameStateModel) {
-    return playerName;
+  static selectingName({ selectingName }: GameStateModel) {
+    return selectingName;
   }
 
   @Action(InitGame)
   init(ctx: StateContext<GameStateModel>) {
     const state = ctx.getState();
+    console.log(state);
     console.log(state.selectionList);
+  }
+
+  @Action(StartGame)
+  startGame(ctx: StateContext<GameStateModel>, action: StartGame) {
+    ctx.patchState({
+      selectingName: false,
+      playerName: action.name,
+    });
   }
 }
