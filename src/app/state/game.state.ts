@@ -76,10 +76,12 @@ export class GameState {
       case 'RS':
       case 'SP':
       case 'PR':
+        alert('👨 Player wins');
         state.playerScore++;
         break;
 
       default:
+        alert('🤖 Computer wins');
         state.computerScore++;
         break;
     }
