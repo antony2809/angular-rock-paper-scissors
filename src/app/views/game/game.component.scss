@@ -1,0 +1,47 @@
+@import '../../../mixins';
+@import '../../../variables';
+
+.game {
+  @include flex(flex-start, center, row);
+  .game-wrapper {
+    @include flex(flex-start, center, column);
+    margin-top: 40px;
+    width: 500px;
+    border: 3px solid $primary-color;
+    padding: 12px;
+
+    .choices {
+      width: 100%;
+      @include flex(center, space-between, row);
+      margin-bottom: 40px;
+      button {
+        @include button($primary-color, white);
+        width: 100px;
+      }
+    }
+    .scoreboard {
+      width: 100%;
+      .players {
+        @include flex(center, space-around, row);
+        margin-bottom: 40px;
+        .player {
+          @include flex(center, center, column);
+          .name {
+            font-size: 16px;
+            color: rgba($color: $primary-color, $alpha: 0.8);
+          }
+          .score {
+            font-size: 28px;
+          }
+        }
+      }
+      .total-games {
+        width: 100%;
+        @include flex(center, center, column);
+        div {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

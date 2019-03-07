@@ -1,5 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { InitGame, StartGame } from './game.actions';
+import { InitGame, StartGame, Play } from './game.actions';
+import { shuffle } from '../lib/shuffle';
 
 export class GameStateModel {
   selectingName: boolean;
@@ -14,6 +15,12 @@ const initialList = Array.from(Array(30))
   .fill('R', 0, 10)
   .fill('P', 10, 20)
   .fill('S', 20, 30);
+
+const enemies = {
+  R: 'P',
+  P: 'S',
+  S: 'R',
+};
 
 @State<GameStateModel>({
   name: 'game',
@@ -48,7 +55,37 @@ export class GameState {
   startGame(ctx: StateContext<GameStateModel>, action: StartGame) {
     ctx.patchState({
       selectingName: false,
-      playerName: action.name,
+      playerName: action.name.toLowerCase(),
     });
+  }
+
+  @Action(Play)
+  play(ctx: StateContext<GameStateModel>, action: Play) {
+    const state = ctx.getState();
+    const list = shuffle(state.selectionList);
+    const loseAgainst = enemies[action.input];
+    list.pop();
+    list.push(loseAgainst);
+    const result = list[Math.floor(Math.random() * list.length)];
+    switch (`${action.input}${result}`) {
+      case 'RR':
+      case 'PP':
+      case 'SS':
+        alert('That was a tie 😃');
+        break;
+      case 'RS':
+      case 'SP':
+      case 'PR':
+        state.playerScore++;
+        break;
+
+      default:
+        state.computerScore++;
+        break;
+    }
+
+    state.totalGames++;
+
+    ctx.patchState(state);
   }
 }
