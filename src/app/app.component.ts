@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { shuffle } from './lib/shuffle';
-import { Store, Select } from '@ngxs/store';
-import { InitGame } from './state/game.actions';
-import { GameState, GameStateModel } from './state/game.state';
+import { Select } from '@ngxs/store';
+import { GameState } from './state/game.state';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,8 +11,6 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   @Select(GameState.selectingName) selectingName$: Observable<boolean>;
 
-  constructor(private store: Store) {
-    this.store.dispatch(new InitGame());
-  }
+  constructor() {}
   title = 'rock-paper-scissors';
 }

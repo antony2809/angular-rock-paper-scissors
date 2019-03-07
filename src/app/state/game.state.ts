@@ -1,5 +1,5 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { InitGame, StartGame, Play } from './game.actions';
+import { StartGame, Play } from './game.actions';
 import { shuffle } from '../lib/shuffle';
 
 export class GameStateModel {
@@ -42,13 +42,6 @@ export class GameState {
   @Selector()
   static selectingName({ selectingName }: GameStateModel) {
     return selectingName;
-  }
-
-  @Action(InitGame)
-  init(ctx: StateContext<GameStateModel>) {
-    const state = ctx.getState();
-    console.log(state);
-    console.log(state.selectionList);
   }
 
   @Action(StartGame)
