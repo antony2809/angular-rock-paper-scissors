@@ -80,7 +80,7 @@ export class GameState {
     }
 
     state.totalGames++;
-
+    state.selectionList = list;
     ctx.patchState(state);
   }
 }
